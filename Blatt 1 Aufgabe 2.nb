@@ -1,0 +1,274 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9167,        264]
+NotebookOptionsPosition[      7694,        232]
+NotebookOutlinePosition[      8044,        247]
+CellTagsIndexPosition[      8001,        244]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MyPrimes", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"L", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"t", ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ",", 
+      RowBox[{"i", "=", "2"}], ",", "k"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"L", "=", 
+      RowBox[{"ReplacePart", "[", 
+       RowBox[{"L", ",", "0", ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"i", "*", "i"}], "\[LessEqual]", "n"}], ",", 
+       RowBox[{
+        RowBox[{"k", "=", 
+         RowBox[{"i", "+", "i"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"While", "[", 
+         RowBox[{
+          RowBox[{"k", "\[LessEqual]", "n"}], ",", 
+          RowBox[{
+           RowBox[{"L", "=", 
+            RowBox[{"ReplacePart", "[", 
+             RowBox[{"L", ",", "0", ",", "k"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"k", "=", 
+            RowBox[{"k", "+", "i"}]}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"i", "=", 
+         RowBox[{"i", "+", "1"}]}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"Select", "[", 
+       RowBox[{"L", ",", "Positive"}], "]"}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.718486081156127*^9},ExpressionUUID->"c1ded07d-2a0d-4518-9d21-\
+ec4dc2bea6e6"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MathPrimes", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"L", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"NextPrime", "[", "t", "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "1", ",", 
+           RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ",", "i"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "\[LessEqual]", "n"}], ",", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"L", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "\[Equal]", 
+          RowBox[{"L", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"L", "=", 
+          RowBox[{"ReplacePart", "[", 
+           RowBox[{"L", ",", 
+            RowBox[{"n", "+", "1"}], ",", "i"}], "]"}]}]}], "]"}]}], "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"Select", "[", 
+       RowBox[{"L", ",", 
+        RowBox[{
+         RowBox[{"#", "\[LessEqual]", "n"}], "&"}]}], " ", "]"}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.718486032122797*^9, 3.7184860351273174`*^9}, {
+  3.7184860660015774`*^9, 
+  3.7184860965088673`*^9}},ExpressionUUID->"91a49887-de17-4d87-af33-\
+0266f447f932"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"CheckPrimes", "[", 
+    RowBox[{"f_", ",", "bound_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"r", ",", "t"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"t", ",", "r"}], "}"}], "=", 
+       RowBox[{"Timing", "@", 
+        RowBox[{"f", "[", "bound", "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<running time: \>\"", ",", "t"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<# of found primes: \>\"", ",", 
+        RowBox[{"Length", "[", "r", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Print", "[", 
+       RowBox[{"\"\<non-prime entries: \>\"", ",", 
+        RowBox[{"Select", "[", 
+         RowBox[{"r", ",", 
+          RowBox[{
+           RowBox[{"!", 
+            RowBox[{"PrimeQ", "[", "#", "]"}]}], "&"}]}], "]"}]}], "]"}]}]}], 
+    "]"}]}], "\n"}]], "Input",
+ CellChangeTimes->{{3.718486124105589*^9, 3.718486128237528*^9}, {
+   3.7184861886275587`*^9, 3.718486190288123*^9}, {3.718486232981135*^9, 
+   3.7184862418546543`*^9}, 3.7184862755507812`*^9, 3.7184863103073015`*^9, 
+   3.7184863513580527`*^9},ExpressionUUID->"70ce75df-6401-4311-8eeb-\
+d9af16a06cab"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CheckPrimes", "[", 
+  RowBox[{"MyPrimes", ",", "100000"}], "]"}]], "Input",
+ CellChangeTimes->{{3.7184861315366955`*^9, 3.7184861552808857`*^9}, {
+   3.7184862525209007`*^9, 3.7184862578309946`*^9}, {3.7184864516548944`*^9, 
+   3.7184865127985983`*^9}, 
+   3.7184866042858534`*^9},ExpressionUUID->"bb7abf2e-41bb-42d5-8fc4-\
+ef13e71e7c7e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"running time: \"\>", "\[InvisibleSpace]", "20.375`"}],
+  SequenceForm["running time: ", 20.375],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.7184864607416544`*^9, 3.7184865040602064`*^9}, 
+   3.7184866275141687`*^9},ExpressionUUID->"31c479d6-3312-4d2f-baec-\
+949fbd232e04"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"# of found primes: \"\>", "\[InvisibleSpace]", "9592"}],
+  SequenceForm["# of found primes: ", 9592],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.7184864607416544`*^9, 3.7184865040602064`*^9}, 
+   3.7184866275161543`*^9},ExpressionUUID->"9b388f02-294d-4754-b8e8-\
+911c10b2bb6c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"non-prime entries: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm["non-prime entries: ", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.7184864607416544`*^9, 3.7184865040602064`*^9}, 
+   3.7184866275251637`*^9},ExpressionUUID->"9c98b3fb-b5de-4448-ae61-\
+1eac1fbf8383"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.718486445062563*^9, 
+  3.718486445067568*^9}},ExpressionUUID->"39387f1c-4fda-4fd2-bff9-\
+0aac47f47166"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"CheckPrimes", "[", 
+  RowBox[{"MathPrimes", ",", "100000"}], "]"}]], "Input",ExpressionUUID->\
+"b0f10279-a097-4677-89cf-677bb1d93343"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"running time: \"\>", "\[InvisibleSpace]", "31.890625`"}],
+  SequenceForm["running time: ", 31.890625],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.718486659365735*^9, 
+  3.7184866953727484`*^9},ExpressionUUID->"e493c060-5b93-440d-8986-\
+061cf9f6e1d7"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"# of found primes: \"\>", "\[InvisibleSpace]", "9592"}],
+  SequenceForm["# of found primes: ", 9592],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.718486659365735*^9, 
+  3.7184866953742495`*^9},ExpressionUUID->"47a657b7-fbec-471f-9a06-\
+08fafdfdfaca"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"non-prime entries: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm["non-prime entries: ", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.718486659365735*^9, 
+  3.7184866953817573`*^9},ExpressionUUID->"65ff4d6c-0e0e-4208-b391-\
+70742f42d03d"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1264, 965},
+WindowMargins->{{Automatic, -1280}, {Automatic, 0}},
+FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1512, 41, 231, "Input",ExpressionUUID->"c1ded07d-2a0d-4518-9d21-ec4dc2bea6e6"],
+Cell[2073, 63, 1520, 44, 193, "Input",ExpressionUUID->"91a49887-de17-4d87-af33-0266f447f932"],
+Cell[3596, 109, 1312, 34, 177, "Input",ExpressionUUID->"70ce75df-6401-4311-8eeb-d9af16a06cab"],
+Cell[CellGroupData[{
+Cell[4933, 147, 362, 7, 28, "Input",ExpressionUUID->"bb7abf2e-41bb-42d5-8fc4-ef13e71e7c7e"],
+Cell[CellGroupData[{
+Cell[5320, 158, 330, 7, 22, "Print",ExpressionUUID->"31c479d6-3312-4d2f-baec-949fbd232e04"],
+Cell[5653, 167, 335, 7, 22, "Print",ExpressionUUID->"9b388f02-294d-4754-b8e8-911c10b2bb6c"],
+Cell[5991, 176, 349, 8, 22, "Print",ExpressionUUID->"9c98b3fb-b5de-4448-ae61-1eac1fbf8383"]
+}, Open  ]]
+}, Open  ]],
+Cell[6367, 188, 152, 3, 28, InheritFromParent,ExpressionUUID->"39387f1c-4fda-4fd2-bff9-0aac47f47166"],
+Cell[CellGroupData[{
+Cell[6544, 195, 158, 3, 28, "Input",ExpressionUUID->"b0f10279-a097-4677-89cf-677bb1d93343"],
+Cell[CellGroupData[{
+Cell[6727, 202, 307, 7, 22, "Print",ExpressionUUID->"e493c060-5b93-440d-8986-061cf9f6e1d7"],
+Cell[7037, 211, 306, 7, 22, "Print",ExpressionUUID->"47a657b7-fbec-471f-9a06-08fafdfdfaca"],
+Cell[7346, 220, 320, 8, 22, "Print",ExpressionUUID->"65ff4d6c-0e0e-4208-b391-70742f42d03d"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
